@@ -3,4 +3,4 @@ project(hashtree)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(hashtree main.cpp bst.cpp bst.h)
+add_executable(hashtree main.cpp bst.cpp bst.h hashtree.cpp hashtree.h)
