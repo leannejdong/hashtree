@@ -19,7 +19,7 @@ struct node
     unique_ptr<node> left, right;
 };
 
-struct bst
+struct bst // is a wrapper over the node that provide a clean interface. Basically it represents a tree
 {
     unique_ptr<node> root;
 
@@ -29,7 +29,7 @@ struct bst
     }
 
 private:
-    node *find_impl(node *current, int value)
+    node *find_impl(node *current, int value) // find a node with a particular value
     {
         if (!current)
         {
@@ -46,9 +46,11 @@ private:
             std::cout << "Going left from " << current->data << ", ";
             return find_impl(current->left.get(), value);
         }
-        // Value will be in the right subtree
-        std::cout << "Going right from " << current->data << ", ";
-        return find_impl(current->right.get(), value);
+        if (value > current->data) // value will be in the right subtree
+        {
+            std::cout << "Going right from " << current->data << ", ";
+            return find_impl(current->right.get(), value);
+        }
     }
 
 public:
