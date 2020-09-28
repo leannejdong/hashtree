@@ -3,8 +3,8 @@
 
 #include <iostream>
 
-//int main()
-//{
+int main()
+{
 //    bst tree;
 //    tree.insert(12);
 //    tree.insert(10);
@@ -29,10 +29,8 @@
 //        std::cout << "Element 12 is present in the tree" << std::endl;
 //    else
 //        std::cout << "Element 12 is NOT present in the tree" << std::endl;
-//}
 
-int main()
-{
+    // Implementing hash tree
     int choice, key, value, n, c;
     //   std::vector<bst> arr;
     //    init();
