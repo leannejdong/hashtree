@@ -19,13 +19,13 @@ struct bst {
 };
 
 //bst *arr;
-std::vector<bst> arr;
+std::vector<bst> arr(maxim);
 
 // void insert(node *tree, unique_ptr<node> item);
 // node *find(node *tree, int key);
 // unique_ptr<node> deleteValue(unique_ptr<node> tree, int key);
 // void display_tree(node *tree);
-/* this function inserts the newly created node in the existing Binary Tree */
+// this function inserts the newly created node in the existing Binary Tree
 void insert(node *tree, unique_ptr<node> item)
 {
 
@@ -52,9 +52,7 @@ void insert(node *tree, unique_ptr<node> item)
             tree->right = std::move(item);
 
             return;
-
         }
-
         else
         {
             insert(tree->right.get(), std::move(item));
@@ -86,87 +84,46 @@ node *find(node *tree, int key)
 
 
 unique_ptr<node> deleteValue(unique_ptr<node> tree, int key)
-
 {
-
     if (tree == nullptr)
-
     {
-
         return nullptr;
-
     }
-
     if (key < tree->key)
-
     {
-
         tree->left = deleteValue(std::move(tree->left), key);
-
         return tree;
-
     }
-
     else if (key > tree->key)
-
     {
-
         tree->right = deleteValue(std::move(tree->right), key);
-
         return tree;
-
     }
-
     else {
 
-        /* reached the node */
-
+        // reached the node
         if (tree->left == nullptr  &&  tree->right == nullptr)
-
         {
-
             size_tree--;
-
             return std::move(tree->left);
-
+        }
+        else if (tree->left != nullptr  &&  tree->right == nullptr)
+        {
+            size_tree--;
+            return std::move(tree->left);
         }
 
-        else if (tree->left != NULL  &&  tree->right == NULL)
-
+        else if (tree->left == nullptr  &&  tree->right != nullptr)
         {
-
             size_tree--;
-
-            return std::move(tree->left);
-
-        }
-
-        else if (tree->left == NULL  &&  tree->right != NULL)
-
-        {
-
-            size_tree--;
-
             return std::move(tree->right);
-
         }
-
         else {
-
             node *left_one = tree->left.get();
-
-
-
             while (left_one->right != nullptr)
-
             {
-
                 left_one = left_one->right.get();
-
             }
-
-
-
             tree->key = left_one->key;
 
             tree->value = left_one->value;
@@ -174,81 +131,48 @@ unique_ptr<node> deleteValue(unique_ptr<node> tree, int key)
             tree->left = deleteValue(std::move(tree->left), tree->key);
 
             return tree;
-
         }
-
     }
-
 }
 
 /* displays content of binary tree of particular index */
 
 void display_tree(node *tree)
-
 {
-
     if (tree == nullptr)
-
     {
-
         return;
-
     }
-
     cout << tree->key << " and " << tree->value << "   ";
-
-
-
     if (tree->left != nullptr)
-
     {
-
         display_tree(tree->left.get());
-
     }
-
     if (tree->right != nullptr)
-
     {
-
         display_tree(tree->right.get());
-
     }
-
 }
 
 
-/* displays the content of hash Tree */
-
+// displays the content of hash Tree
 void display()
 {
     int i = 0;
     for(i = 0; i < maxim; i++)
     {
         node *tree = arr[i].root.get();
-
         if (tree == nullptr)
-
         {
-
             cout << "arr[" << i << "] has no elements" << endl;
-
         }
-
         else
-
         {
-
             cout << "arr[" << i << "] has elements" << endl;
-
             display_tree(tree);
-
         }
-
     }
-
 }
-
 // create an index corresponding to every given key
 int hashcode(int key)
 {
@@ -294,7 +218,6 @@ void add(int key, int value)
 }
 
 /* for initializing the hash Tree */
-
 void init()
 {
     int i = 0;
@@ -304,18 +227,13 @@ void init()
     }
 }
 
-
-
-/* returns the size of hash Tree */
+//returns the size of hash Tree
 
 int size_of_hashTree()
 {
     return size_tree;
 }
-
-
-
-/* to del a key from hash Tree */
+//to del a key from hash Tree
 void del(int key)
 {
     int index = hashcode(key);
